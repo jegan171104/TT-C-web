@@ -18,8 +18,10 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="ttclogo.jpeg" alt="Thinktankcrue Logo" class="nav-logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span class="nav-logo-text" style="display: none;">Thinktankcrue</span>
+               <a href="#home" class="logo-link" aria-label="Think Tank Crue home">
+                   <img src="ttclogo.jpeg" alt="Think Tank Crue logo" class="nav-logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                   <span class="nav-logo-text">Think Tank Crue</span>
+               </a>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -27,6 +29,7 @@
                 <li><a href="#videos" class="nav-link">Videos</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            
         </div>
     </nav>
 
@@ -37,7 +40,7 @@
                 <img src="ttclogo.jpeg" alt="Thinktankcrue Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="logo-text" style="display: none;">Thinktankcrue</div>
             </div>
-            <h1 class="hero-title">Transform Your Digital Presence</h1>
+            <h1 class="hero-title">Think, create Grow</h1>
             <p class="hero-subtitle">We help businesses grow with strategic digital marketing solutions</p>
             <a href="#services" class="cta-button">Explore Our Services</a>
         </div>
@@ -48,18 +51,9 @@
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card" data-service="social-media">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </div>
-                    <h3>Social Media Marketing</h3>
-                    <p>Grow your brand on Instagram, Facebook, and other platforms with strategic content and engagement.</p>
-                    <div class="service-click-hint">Click for details →</div>
-                </div>
-
+            <div class="services-carousel-wrapper">
+                <button class="services-prev" aria-label="Previous services">◀</button>
+                <div class="services-grid carousel" role="list">
                 <div class="service-card" data-service="seo">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -67,34 +61,141 @@
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
                     </div>
-                    <h3>SEO Optimization</h3>
-                    <p>Improve your Google ranking and drive organic traffic to your website with proven SEO strategies.</p>
+                    <h3>SEO (Search Engine Optimization)</h3>
+                    <p>Optimize your website to appear on Google's first page — keywords, content, and backlinks.</p>
                     <div class="service-click-hint">Click for details →</div>
                 </div>
 
-                <div class="service-card" data-service="content">
+                <div class="service-card" data-service="social-media">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </div>
+                    <h3>Social Media Marketing (SMM)</h3>
+                    <p>Instagram, Facebook, YouTube, Twitter (X): handles, posts, reels, and engagement growth.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="social-ads">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 11h4l3 9 4-18 3 9h4"></path>
+                        </svg>
+                    </div>
+                    <h3>Social Media Ads (Paid Ads)</h3>
+                    <p>Insta / FB / YouTube Ads — campaigns to increase leads, sales, and followers.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="google-ads">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                            <path d="M8 21h8"></path>
+                        </svg>
+                    </div>
+                    <h3>Google Ads (PPC)</h3>
+                    <p>Google Search Ads and Display Ads — appear in paid "Ad" results to drive traffic.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="content-marketing">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
-                    <h3>Content Creation</h3>
-                    <p>Professional reels, posters, ad creatives, and engaging content that converts viewers into customers.</p>
+                    <h3>Content Marketing</h3>
+                    <p>Blog, captions, reels scripts and video content to build brand value.</p>
                     <div class="service-click-hint">Click for details →</div>
                 </div>
 
-                <div class="service-card" data-service="advertising">
+                <div class="service-card" data-service="email-marketing">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            <path d="M4 4h16v16H4z"></path>
+                            <path d="M22 6l-10 7L2 6"></path>
                         </svg>
                     </div>
-                    <h3>Paid Advertising</h3>
-                    <p>High ROI Facebook and Google ads campaigns that maximize your advertising budget and drive results.</p>
+                    <h3>Email Marketing</h3>
+                    <p>Offers, updates and follow-up mails — automation and segmented campaigns for businesses.</p>
                     <div class="service-click-hint">Click for details →</div>
                 </div>
+
+                <div class="service-card" data-service="whatsapp-marketing">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 01-1.5 4.7L21 21l-4.8-1.4a8.5 8.5 0 01-7-7V3h1a8.5 8.5 0 017 8.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp Marketing</h3>
+                    <p>Broadcast messages, automation and customer follow-ups via WhatsApp.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="influencer-marketing">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path>
+                        </svg>
+                    </div>
+                    <h3>Influencer Marketing</h3>
+                    <p>Instagram and YouTube influencer collaborations for brand promotion.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="graphic-design">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="14" rx="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        </svg>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>Posters, banners, thumbnails and ad creatives for campaigns.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="video-marketing">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 7l-7 5 7 5V7z"></path>
+                            <rect x="1" y="5" width="15" height="14" rx="2"></rect>
+                        </svg>
+                    </div>
+                    <h3>Video Marketing</h3>
+                    <p>Reels, ad videos and YouTube content to engage and convert audiences.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="landing-promotion">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12h18"></path>
+                            <path d="M12 3v18"></path>
+                        </svg>
+                    </div>
+                    <h3>Website / Landing Page Promotion</h3>
+                    <p>Drive website traffic and generate leads through targeted campaigns.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+
+                <div class="service-card" data-service="analytics-reporting">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18 9l-5 5-3-3"></path>
+                        </svg>
+                    </div>
+                    <h3>Analytics &amp; Reporting</h3>
+                    <p>Reach, clicks, leads and sales reports to measure campaign performance.</p>
+                    <div class="service-click-hint">Click for details →</div>
+                </div>
+                </div>
+                <button class="services-next" aria-label="Next services">▶</button>
             </div>
         </div>
     </section>
@@ -105,8 +206,8 @@
             <h2 class="section-title">Sample Work</h2>
             <div class="videos-grid" id="videosGrid">
                 <!-- YouTube Video Example -->
-                <div class="video-card">
-                    <div class="video-wrapper">
+                <!-- <div class="video-card">
+                    <!-- <div class="video-wrapper">
                         <iframe 
                             src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
                             frameborder="0" 
@@ -114,26 +215,31 @@
                             allowfullscreen
                             loading="lazy">
                         </iframe>
-                    </div>
+                    </div> 
                     <div class="video-card-content">
                         <h3>Digital Marketing Tips</h3>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Local Video Example (commented out - uncomment and add video file path) -->
-                <!--
+                
                 <div class="video-card">
                     <div class="video-wrapper">
-                        <video controls>
-                            <source src="videos/sample-video.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                            <video src="samplevideo2.mp4" autoplay muted loop></video>
                     </div>
                     <div class="video-card-content">
-                        <h3>Our Work Sample</h3>
+                        <a href="https://www.instagram.com/p/DTBDPI-jCzL/">  Our Work Sample </a>
                     </div>
                 </div>
-                -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                            <video src="samplevideo.mp4" autoplay muted loop></video>
+                    </div>
+                    <div class="video-card-content">
+                        <a href="https://www.instagram.com/p/DTDYCVCDGTY/">Our Work Sample</a>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
