@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-    
-    // Observe service cards and video cards
-    const animatedElements = document.querySelectorAll('.service-card, .video-card');
+
+    // Observe only video cards here (service cards use a staggered reveal below)
+    const animatedElements = document.querySelectorAll('.video-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -138,6 +138,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Ensure service cards are visible and static (no stagger/tilt animations)
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.service-card').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = '';
+        el.classList.remove('visible', 'float', 'dragging');
+    });
+});
+
 // Add active class styling via JavaScript (if needed)
 // This can be handled in CSS with :target pseudo-class, but JS provides better control
 document.addEventListener('DOMContentLoaded', function() {
@@ -157,96 +166,195 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Service details data
     const serviceDetails = {
-        'social-media': {
-            title: 'Social Media Marketing',
-            description: 'Transform your brand\'s online presence with our comprehensive social media marketing strategies. We help businesses build meaningful connections, increase engagement, and drive conversions across all major platforms.',
-            features: [
-                'Custom content strategy for each platform',
-                'Daily posting and community management',
-                'Influencer partnerships and collaborations',
-                'Social media advertising campaigns',
-                'Analytics and performance tracking',
-                'Brand voice and messaging development'
-            ],
-            benefits: [
-                'Increased brand awareness and visibility',
-                'Higher engagement rates and follower growth',
-                'Improved customer relationships',
-                'Better ROI on marketing investments',
-                'Competitive advantage in your industry'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>`
-        },
         'seo': {
-            title: 'SEO Optimization',
-            description: 'Boost your website\'s visibility and drive organic traffic with our proven SEO strategies. We optimize every aspect of your online presence to rank higher on search engines and attract qualified leads.',
+            title: 'SEO (Search Engine Optimization)',
+            description: 'Optimize your website to rank on Google\'s first page — keywords, content, backlinks, and technical SEO.',
             features: [
-                'Comprehensive keyword research and analysis',
-                'On-page and technical SEO optimization',
-                'Content strategy and optimization',
-                'Link building and backlink acquisition',
-                'Local SEO for geographic targeting',
-                'Monthly performance reports and insights'
+                'Keyword research & strategy',
+                'On-page & technical SEO',
+                'Content optimization',
+                'Backlink building',
+                'Local SEO and GMB optimization',
+                'Monthly ranking & traffic reports'
             ],
             benefits: [
-                'Higher search engine rankings',
-                'Increased organic website traffic',
-                'Better user experience and site performance',
-                'Long-term sustainable growth',
-                'Cost-effective marketing solution'
+                'Higher Google rankings',
+                'Increased organic traffic',
+                'Sustained lead growth',
+                'Better visibility for target keywords'
             ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-            </svg>`
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>`
         },
-        'content': {
-            title: 'Content Creation',
-            description: 'Create compelling, high-quality content that resonates with your audience and drives action. From stunning visuals to engaging videos, we produce content that tells your brand\'s story and converts viewers into customers.',
+        'social-media': {
+            title: 'Social Media Marketing (SMM)',
+            description: 'Instagram, Facebook, YouTube and Twitter (X): account setup, posts, reels, and engagement growth services.',
             features: [
-                'Professional video production and editing',
-                'Social media graphics and designs',
-                'Blog posts and written content',
-                'Photography and image editing',
-                'Animated graphics and motion design',
-                'Branded templates and style guides'
+                'Account setup & branding',
+                'Content calendar & posting',
+                'Reels and short-form video strategy',
+                'Community management',
+                'Engagement & follower growth tactics'
             ],
             benefits: [
-                'Professional, polished brand image',
-                'Increased engagement and shares',
-                'Better conversion rates',
-                'Consistent brand messaging',
-                'Time-saving content production'
+                'Improved brand presence',
+                'Higher engagement rates',
+                'Organic follower growth'
             ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="9" y1="3" x2="9" y2="21"></line>
-            </svg>`
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`
         },
-        'advertising': {
-            title: 'Paid Advertising',
-            description: 'Maximize your advertising ROI with data-driven paid campaigns across Facebook, Google, and other platforms. We create, optimize, and manage ads that deliver measurable results and drive business growth.',
+        'social-ads': {
+            title: 'Social Media Ads (Paid Ads)',
+            description: 'Instagram/Facebook/YouTube ads — campaign setup to drive leads, sales and followers.',
             features: [
-                'Campaign strategy and planning',
-                'Ad creative design and development',
-                'Audience targeting and segmentation',
-                'A/B testing and optimization',
-                'Budget management and bid strategies',
-                'Real-time performance monitoring'
+                'Audience targeting & creative setup',
+                'Ad copy & creative production',
+                'A/B testing & optimization',
+                'Conversion tracking & pixels'
             ],
             benefits: [
-                'Immediate visibility and traffic',
-                'Precise audience targeting',
-                'Measurable ROI and conversions',
-                'Scalable campaign growth',
-                'Expert campaign management'
+                'Faster lead generation',
+                'Measurable ROI',
+                'Scalable ad performance'
             ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>`
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h4l3 9 4-18 3 9h4"></path></svg>`
+        },
+        'google-ads': {
+            title: 'Google Ads (PPC)',
+            description: 'Google Search Ads and Display Ads — paid results ("Ad") to drive traffic and conversions.',
+            features: [
+                'Search & Display campaign setup',
+                'Keyword bidding & match types',
+                'Remarketing & audience lists',
+                'Conversion tracking & optimization'
+            ],
+            benefits: [
+                'Immediate visibility on search',
+                'Targeted traffic',
+                'Trackable conversions'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path></svg>`
+        },
+        'content-marketing': {
+            title: 'Content Marketing',
+            description: 'Blog posts, captions, reel scripts and video content that build value for your brand.',
+            features: [
+                'Content strategy & planning',
+                'Blog writing & SEO content',
+                'Reels scripts & video concepts',
+                'Caption writing & repurposing'
+            ],
+            benefits: [
+                'Stronger brand authority',
+                'Better organic discoverability',
+                'Content that converts'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>`
+        },
+        'email-marketing': {
+            title: 'Email Marketing',
+            description: 'Offers, updates and follow-up emails — automated email campaigns tailored for businesses.',
+            features: [
+                'Campaign design & templates',
+                'Segmentation & automation',
+                'A/B testing for subject lines',
+                'Performance reporting'
+            ],
+            benefits: [
+                'Higher retention & repeat sales',
+                'Direct customer communication',
+                'Measurable campaign ROI'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"></path><path d="M22 6l-10 7L2 6"></path></svg>`
+        },
+        'whatsapp-marketing': {
+            title: 'WhatsApp Marketing',
+            description: 'Broadcast messages, automation, and customer follow-ups through WhatsApp for direct engagement.',
+            features: [
+                'Template & broadcast campaigns',
+                'Automation flows & quick replies',
+                'Customer follow-up sequences'
+            ],
+            benefits: [
+                'High open rates',
+                'Direct customer touchpoint',
+                'Fast follow-ups'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-1.5 4.7L21 21l-4.8-1.4a8.5 8.5 0 01-7-7V3h1a8.5 8.5 0 017 8.5z"></path></svg>`
+        },
+        'influencer-marketing': {
+            title: 'Influencer Marketing',
+            description: 'Instagram & YouTube influencer collaborations to promote your brand and reach new audiences.',
+            features: [
+                'Influencer discovery & outreach',
+                'Campaign briefs & coordination',
+                'Performance tracking & reporting'
+            ],
+            benefits: [
+                'Authentic reach',
+                'Content amplification',
+                'Improved brand trust'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path></svg>`
+        },
+        'graphic-design': {
+            title: 'Graphic Design',
+            description: 'Posters, banners, thumbnails, and ad creatives to visually communicate your message.',
+            features: [
+                'Poster & banner design',
+                'Ad creative sets',
+                'Thumbnails & social templates'
+            ],
+            benefits: [
+                'Professional visuals',
+                'Higher ad CTRs',
+                'Consistent brand look'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle></svg>`
+        },
+        'video-marketing': {
+            title: 'Video Marketing',
+            description: 'Reels, ad videos and long-form YouTube content to engage audiences and drive conversions.',
+            features: [
+                'Reels & short-form production',
+                'Ad video creation',
+                'YouTube channel content & strategy'
+            ],
+            benefits: [
+                'Higher engagement',
+                'Improved conversion rates',
+                'Stronger storytelling'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>`
+        },
+        'landing-promotion': {
+            title: 'Website / Landing Page Promotion',
+            description: 'Promote landing pages and websites to drive traffic and capture leads for your campaigns.',
+            features: [
+                'Traffic campaigns & funnels',
+                'Conversion rate optimization',
+                'Lead magnet & form setups'
+            ],
+            benefits: [
+                'Increased leads',
+                'Better campaign ROI',
+                'Optimized conversion paths'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"></path><path d="M12 3v18"></path></svg>`
+        },
+        'analytics-reporting': {
+            title: 'Analytics & Reporting',
+            description: 'Detailed reports on reach, clicks, leads and sales to measure and improve campaign performance.',
+            features: [
+                'Custom report dashboards',
+                'Weekly / monthly insights',
+                'Funnel & attribution analysis'
+            ],
+            benefits: [
+                'Clear performance visibility',
+                'Data-driven decisions',
+                'Improved ROI over time'
+            ],
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18 9l-5 5-3-3"></path></svg>`
         }
     };
 
@@ -325,5 +433,114 @@ document.addEventListener('DOMContentLoaded', function() {
     // Prevent modal content clicks from closing modal
     modal.querySelector('.modal-content').addEventListener('click', function(e) {
         e.stopPropagation();
+    });
+
+    // If user clicks the modal CTA (Get Started) close modal and hide services section
+    if (modalCta) {
+        modalCta.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeModal();
+
+            const servicesSection = document.getElementById('services');
+            if (servicesSection) {
+                servicesSection.style.transition = 'opacity 420ms ease, max-height 420ms ease';
+                servicesSection.style.opacity = '0';
+                servicesSection.style.maxHeight = '0';
+                setTimeout(() => { servicesSection.style.display = 'none'; }, 450);
+            }
+
+            // Scroll to contact section after hiding services
+            const contact = document.getElementById('contact');
+            if (contact) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = contact.offsetTop - navbarHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+        });
+    }
+
+    // Create a persistent "View services" pill to restore the hidden section
+    function ensureViewServicesPill() {
+        if (document.getElementById('viewServicesPill')) return document.getElementById('viewServicesPill');
+        const btn = document.createElement('button');
+        btn.id = 'viewServicesPill';
+        btn.className = 'view-services-pill';
+        btn.textContent = 'View services';
+        btn.setAttribute('aria-label', 'View services');
+        btn.addEventListener('click', function() {
+            const servicesSection = document.getElementById('services');
+            if (!servicesSection) return;
+            servicesSection.style.display = '';
+            // allow layout then animate back
+            requestAnimationFrame(() => {
+                servicesSection.style.maxHeight = '';
+                servicesSection.style.opacity = '1';
+            });
+            // remove pill with fade
+            btn.classList.remove('show');
+            setTimeout(() => { btn.remove(); }, 260);
+            // scroll to services
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const targetPosition = servicesSection.offsetTop - navbarHeight;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        });
+        document.body.appendChild(btn);
+        // small delay to enable transition
+        setTimeout(() => btn.classList.add('show'), 20);
+        return btn;
+    }
+
+    // When services are hidden (modal CTA), show the pill
+    if (modalCta) {
+        modalCta.addEventListener('click', function() {
+            // small delay to ensure services were hidden
+            setTimeout(() => { ensureViewServicesPill(); }, 280);
+        });
+    }
+});
+
+// Services carousel controls (prev/next + drag-to-scroll)
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.services-grid.carousel');
+    const prev = document.querySelector('.services-prev');
+    const next = document.querySelector('.services-next');
+    if (!container) return;
+
+    const scrollAmount = () => Math.round(container.clientWidth * 0.7);
+
+    if (prev) {
+        prev.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        });
+    }
+    if (next) {
+        next.addEventListener('click', () => {
+            container.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+        });
+    }
+
+    // Drag to scroll
+    let isDown = false, startX, scrollLeft;
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('dragging');
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+    container.addEventListener('mouseleave', () => { isDown = false; container.classList.remove('dragging'); });
+    container.addEventListener('mouseup', () => { isDown = false; container.classList.remove('dragging'); });
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 1; // scroll-fast
+        container.scrollLeft = scrollLeft - walk;
+    });
+
+    // Keyboard accessibility: arrow keys when focused
+    container.setAttribute('tabindex', '0');
+    container.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { container.scrollBy({ left: 260, behavior: 'smooth' }); }
+        if (e.key === 'ArrowLeft') { container.scrollBy({ left: -260, behavior: 'smooth' }); }
     });
 });
