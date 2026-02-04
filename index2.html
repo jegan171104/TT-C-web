@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Thinktankcrue - Digital Marketing Company">
+<title>Thinktankcrue - Digital Marketing Solutions</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- ================= CSS START ================= -->
+<style>
+
+/* ======= YOUR styles.css CONTENT (FULL) ======= */
+
+:root {
+    --primary-gradient: linear-gradient(90deg, #0b1220, #1b2a44);
+    --accent-gradient: linear-gradient(90deg, #0099ff, #00bfff);
+    --primary-color: #0b1220;
+    --accent-color: #0099ff;
+    --text-light: #4a5568;
+    --bg-white: #fcfdfe;
+    --bg-light: #f6f8fb;
+    --shadow-md: 0 10px 25px rgba(0,0,0,0.1);
+    --border-radius: 20px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-white);
+    color: #0a0a0a;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: linear-gradient(90deg, #060a1e, #0c122d);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#fff,#f0f4f8);
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* WHY WE */
+.why-we {
+    background: var(--bg-light);
+    padding: 5rem 2rem;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 2rem;
+}
+
+/* SERVICES */
+.services {
+    padding: 5rem 2rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+/* VIDEOS */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2rem;
+}
+
+/* CONTACT */
+.contact {
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.contact-btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+</style>
+<!-- ================= CSS END ================= -->
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <strong style="color:white">Think Tank Crue</strong>
+    <ul class="nav-menu">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#videos" class="nav-link">Videos</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div>
+    <h1 class="hero-title">Think, Create, Grow</h1>
+    <p>We help businesses grow with digital marketing</p>
+    <a href="#services" class="cta-button">Explore Services</a>
+  </div>
+</section>
+
+<!-- WHY WE -->
+<section class="why-we">
+  <h2 style="text-align:center">Why Choose Us?</h2>
+  <div class="why-grid">
+    <div class="service-card">Result Driven</div>
+    <div class="service-card">Creative Strategy</div>
+    <div class="service-card">Transparent Reports</div>
+    <div class="service-card">Dedicated Support</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <h2 style="text-align:center">Our Services</h2>
+  <div class="why-grid">
+    <div class="service-card">SEO</div>
+    <div class="service-card">Social Media Marketing</div>
+    <div class="service-card">Google Ads</div>
+    <div class="service-card">Content Marketing</div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <h2 style="text-align:center">Sample Work</h2>
+  <div class="videos-grid">
+    <video src="samplevideo.mp4" autoplay muted loop></video>
+    <video src="samplevideo2.mp4" autoplay muted loop></video>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <h2>Get In Touch</h2>
+  <a href="https://wa.me/919999999999" class="contact-btn" style="background:#25D366">WhatsApp</a>
+</section>
+
+<!-- ================= JS START ================= -->
+<script>
+
+/* ======= YOUR script.js CONTENT (IMPORTANT PARTS) ======= */
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href');
+    if(id.startsWith('#')){
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+</script>
+<!-- ================= JS END ================= -->
+
+</body>
+</html>
