@@ -1,546 +1,1306 @@
-// Smooth Scrolling for Navigation Links
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all navigation links
-    const navLinks = document.querySelectorAll('.nav-link');
+/* CSS Variables for Theming - Premium Design */
+:root {
+    /* Navy / Gold premium palette */
+    --primary-gradient: linear-gradient(90deg, #0b1220 0%, #1b2a44 100%);
+    --accent-gradient: linear-gradient(90deg, #0099ff 0%, #00bfff 100%);
+    --premium-gradient: linear-gradient(90deg, #0099ff 0%, #00bfff 100%);
+    --gold-gradient: linear-gradient(135deg, #0099ff 0%, #00bfff 100%);
+    --primary-color: #0b1220; /* deep navy */
+    --secondary-color: #0f172a;
+    --accent-color: #0099ff; /* electric blue */
+    --text-dark: #0a0a0a;
+    --text-light: #4a5568;
+    --bg-white: #fcfdfe;
+    --bg-light: #f6f8fb;
+    --bg-dark: #0f172a;
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+    --shadow-colored: 0 10px 30px rgba(0, 212, 255, 0.3);
+    --shadow-premium: 0 20px 60px rgba(102, 126, 234, 0.4);
+    --border-radius: 20px;
+    --border-radius-sm: 12px;
+    --border-radius-lg: 30px;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-premium: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* premium look only — no theme toggle */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    width: 100px;
+    height: 5px;
+    background: var(--accent-gradient);
+    border-radius: 3px;
+    letter-spacing: -0.03em;
+}
+
+/* Navigation Bar - Premium Style */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(90deg, #0a4d68 0%, #088395 100%);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    z-index: 1000;
+    transition: var(--transition);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background: linear-gradient(90deg, #073d52 0%, #065f7b 100%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.nav-logo-image {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.nav-logo-image:hover {
+    transform: none;
+    filter: none;
+}
+
+.nav-logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+/* premium navbar styling */
+.navbar {
+    background: linear-gradient(90deg, rgba(6,10,30,0.95), rgba(12,18,45,0.95));
+    border-bottom: 1px solid rgba(255, 215, 130, 0.06);
+}
+.nav-link { color: rgba(255,255,255,0.9); }
+.logo, .nav-logo-text { background: none; }
+
+.nav-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--accent-color);
+}
+
+.nav-link.active::before {
+    width: 100%;
+}
+
+/* Hero Section - Split Design */
+.hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e2e8f0 100%);
+    box-shadow: inset 0 -20px 60px rgba(0, 0, 0, 0.03);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.hero-content {
+    padding: 4rem 3rem;
+    z-index: 1;
+    position: relative;
+}
+
+.hero-logo {
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-image {
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+    transition: var(--transition-premium);
     
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Only handle anchor links
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                
-                const targetId = href.substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    // Calculate offset for fixed navbar
-                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                    const targetPosition = targetSection.offsetTop - navbarHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
+}
 
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        // Add scrolled class when scrolling down
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        lastScroll = currentScroll;
-    });
+.logo-image:hover {
+    transform: none;
+    filter: none;
+  
+}
 
-    // Active navigation link highlighting
-    const sections = document.querySelectorAll('section[id]');
-    
-    function highlightActiveSection() {
-        const scrollPosition = window.pageYOffset + 150;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    margin-bottom: 2rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    margin-bottom: 3rem;
+    color: var(--text-light);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background: var(--premium-gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-premium);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50px;
+    padding: 2px;
+    background: var(--premium-gradient);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover::after {
+    opacity: 1;
+}
+
+.hero-visual {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: var(--primary-gradient);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    opacity: 0.1;
+    animation: morph 8s ease-in-out infinite;
+}
+
+@keyframes morph {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+    75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Section Styles */
+section {
+    padding: 5rem 0;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+}
+
+/* Services Section - Premium Cards */
+.services {
+    background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-light) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+/* Carousel / Netflix-style horizontal list */
+.services-carousel-wrapper {
+    position: relative;
+    margin-top: 3rem;
+}
+.services-grid.carousel {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1rem 2rem;
+    margin: 0;
+}
+.services-grid.carousel .service-card {
+    flex: 0 0 260px;
+    width: 260px;
+    margin: 0;
+}
+.services-grid.carousel::-webkit-scrollbar { display: none; }
+.services-prev, .services-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.9);
+    border: 0;
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.12s ease;
+}
+.services-prev:hover, .services-next:hover { transform: translateY(-50%) scale(1.05); }
+.services-prev { left: 8px; }
+.services-next { right: 8px; }
+
+@media (min-width: 1100px) {
+    .services-grid.carousel .service-card { flex: 0 0 300px; width: 300px; }
+}
+
+@media (max-width: 700px) {
+    .services-prev, .services-next { display: none; }
+}
+
+.service-card {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: var(--border-radius-lg);
+    text-align: left;
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(0, 212, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--premium-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-20px) scale(1.03);
+    box-shadow: var(--shadow-premium);
+    border-color: rgba(0, 212, 255, 0.5);
+    background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card:hover::after {
+    opacity: 1;
+}
+
+.service-click-hint {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.service-card:hover .service-click-hint {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Simplified service card style without entrance/tilt animations */
+.service-card {
+    will-change: none;
+    opacity: 1;
+    transform: none;
+    transition: box-shadow var(--transition), transform 180ms ease, opacity 180ms ease;
+    box-shadow: var(--shadow-md);
+}
+
+/* Remove floating/tilt keyframes - cards stay static */
+
+/* View Services pill (restore hidden services) */
+.view-services-pill {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    background: linear-gradient(90deg, #ffd24a, #ff9a3c);
+    color: #08122a;
+    border: none;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.35);
+    cursor: pointer;
+    z-index: 2001;
+    font-weight: 700;
+    transition: transform 180ms ease, opacity 220ms ease;
+    opacity: 0;
+}
+.view-services-pill.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.view-services-pill:focus { outline: 3px solid rgba(255,255,255,0.12); }
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(9, 9, 121, 0.1) 100%);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: var(--transition);
+    position: relative;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.15) rotate(-5deg);
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.service-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke-width: 2.5;
+}
+
+.service-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.service-card p {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Videos Section */
+.videos {
+    background-color: var(--bg-white);
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.video-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: #000;
+    overflow: hidden;
+}
+
+.video-wrapper iframe,
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-card-content {
+    padding: 1.5rem;
+}
+
+.video-card-content h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+/* Contact Section - Vibrant Design */
+.contact {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.contact .section-title {
+    color: white;
+}
+
+.contact .section-title::before,
+.contact .section-title::after {
+    background: white;
+}
+
+.contact-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 4rem;
+    opacity: 0.95;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.contact-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.contact-btn svg {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.whatsapp-btn {
+    background: #25D366;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+}
+
+.instagram-btn {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagram-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(225, 48, 108, 0.5);
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #000000 100%);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 3rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* Service Modal - Premium Design */
+.service-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-premium);
+    z-index: 2001;
+    transform: scale(0.9) translateY(50px);
+    transition: var(--transition-premium);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+}
+
+.service-modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 10;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    background: var(--accent-gradient);
+    color: white;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.modal-header {
+    padding: 3rem 3rem 2rem;
+    text-align: center;
+    background: var(--premium-gradient);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.modal-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon svg {
+    width: 50px;
+    height: 50px;
+    stroke-width: 2.5;
+}
+
+.modal-header h2 {
+    color: white;
+    font-size: 2.2rem;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+    padding: 2.5rem 3rem;
+}
+
+.modal-description {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.modal-features,
+.modal-benefits {
+    margin-bottom: 2rem;
+}
+
+.modal-features h3,
+.modal-benefits h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-features ul,
+.modal-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-features li,
+.modal-benefits li {
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.modal-features li::before,
+.modal-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.modal-footer {
+    padding: 2rem 3rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modal-cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--premium-gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: var(--transition-premium);
+    box-shadow: var(--shadow-colored);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-cta:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-premium);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
-    
-    window.addEventListener('scroll', highlightActiveSection);
-    highlightActiveSection(); // Call once on load
 
-    // Add fade-in animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe only video cards here (service cards use a staggered reveal below)
-    const animatedElements = document.querySelectorAll('.video-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // Handle CTA button click
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetId = href.substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                    const targetPosition = targetSection.offsetTop - navbarHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
+    .hero-content {
+        padding: 3rem 2rem;
     }
 
-    // Lazy load videos for better performance
-    const videoIframes = document.querySelectorAll('iframe[loading="lazy"]');
-    if ('IntersectionObserver' in window) {
-        const videoObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const iframe = entry.target;
-                    // Videos are already set to lazy load via HTML attribute
-                    videoObserver.unobserve(iframe);
-                }
-            });
-        }, {
-            rootMargin: '50px'
-        });
-        
-        videoIframes.forEach(iframe => {
-            videoObserver.observe(iframe);
-        });
+    .hero-visual {
+        display: none;
     }
-});
+}
 
-// Ensure service cards are visible and static (no stagger/tilt animations)
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.service-card').forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = '';
-        el.classList.remove('visible', 'float', 'dragging');
-    });
-});
-
-// Add active class styling via JavaScript (if needed)
-// This can be handled in CSS with :target pseudo-class, but JS provides better control
-document.addEventListener('DOMContentLoaded', function() {
-    const style = document.createElement('style');
-    style.textContent = `
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-        .nav-link.active::after {
-            width: 100%;
-        }
-    `;
-    document.head.appendChild(style);
-});
-
-// Service Details Modal Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Service details data
-    const serviceDetails = {
-        'seo': {
-            title: 'SEO (Search Engine Optimization)',
-            description: 'Optimize your website to rank on Google\'s first page — keywords, content, backlinks, and technical SEO.',
-            features: [
-                'Keyword research & strategy',
-                'On-page & technical SEO',
-                'Content optimization',
-                'Backlink building',
-                'Local SEO and GMB optimization',
-                'Monthly ranking & traffic reports'
-            ],
-            benefits: [
-                'Higher Google rankings',
-                'Increased organic traffic',
-                'Sustained lead growth',
-                'Better visibility for target keywords'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>`
-        },
-        'social-media': {
-            title: 'Social Media Marketing (SMM)',
-            description: 'Instagram, Facebook, YouTube and Twitter (X): account setup, posts, reels, and engagement growth services.',
-            features: [
-                'Account setup & branding',
-                'Content calendar & posting',
-                'Reels and short-form video strategy',
-                'Community management',
-                'Engagement & follower growth tactics'
-            ],
-            benefits: [
-                'Improved brand presence',
-                'Higher engagement rates',
-                'Organic follower growth'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`
-        },
-        'social-ads': {
-            title: 'Social Media Ads (Paid Ads)',
-            description: 'Instagram/Facebook/YouTube ads — campaign setup to drive leads, sales and followers.',
-            features: [
-                'Audience targeting & creative setup',
-                'Ad copy & creative production',
-                'A/B testing & optimization',
-                'Conversion tracking & pixels'
-            ],
-            benefits: [
-                'Faster lead generation',
-                'Measurable ROI',
-                'Scalable ad performance'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h4l3 9 4-18 3 9h4"></path></svg>`
-        },
-        'google-ads': {
-            title: 'Google Ads (PPC)',
-            description: 'Google Search Ads and Display Ads — paid results ("Ad") to drive traffic and conversions.',
-            features: [
-                'Search & Display campaign setup',
-                'Keyword bidding & match types',
-                'Remarketing & audience lists',
-                'Conversion tracking & optimization'
-            ],
-            benefits: [
-                'Immediate visibility on search',
-                'Targeted traffic',
-                'Trackable conversions'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path></svg>`
-        },
-        'content-marketing': {
-            title: 'Content Marketing',
-            description: 'Blog posts, captions, reel scripts and video content that build value for your brand.',
-            features: [
-                'Content strategy & planning',
-                'Blog writing & SEO content',
-                'Reels scripts & video concepts',
-                'Caption writing & repurposing'
-            ],
-            benefits: [
-                'Stronger brand authority',
-                'Better organic discoverability',
-                'Content that converts'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>`
-        },
-        'email-marketing': {
-            title: 'Email Marketing',
-            description: 'Offers, updates and follow-up emails — automated email campaigns tailored for businesses.',
-            features: [
-                'Campaign design & templates',
-                'Segmentation & automation',
-                'A/B testing for subject lines',
-                'Performance reporting'
-            ],
-            benefits: [
-                'Higher retention & repeat sales',
-                'Direct customer communication',
-                'Measurable campaign ROI'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"></path><path d="M22 6l-10 7L2 6"></path></svg>`
-        },
-        'whatsapp-marketing': {
-            title: 'WhatsApp Marketing',
-            description: 'Broadcast messages, automation, and customer follow-ups through WhatsApp for direct engagement.',
-            features: [
-                'Template & broadcast campaigns',
-                'Automation flows & quick replies',
-                'Customer follow-up sequences'
-            ],
-            benefits: [
-                'High open rates',
-                'Direct customer touchpoint',
-                'Fast follow-ups'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-1.5 4.7L21 21l-4.8-1.4a8.5 8.5 0 01-7-7V3h1a8.5 8.5 0 017 8.5z"></path></svg>`
-        },
-        'influencer-marketing': {
-            title: 'Influencer Marketing',
-            description: 'Instagram & YouTube influencer collaborations to promote your brand and reach new audiences.',
-            features: [
-                'Influencer discovery & outreach',
-                'Campaign briefs & coordination',
-                'Performance tracking & reporting'
-            ],
-            benefits: [
-                'Authentic reach',
-                'Content amplification',
-                'Improved brand trust'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"></path></svg>`
-        },
-        'graphic-design': {
-            title: 'Graphic Design',
-            description: 'Posters, banners, thumbnails, and ad creatives to visually communicate your message.',
-            features: [
-                'Poster & banner design',
-                'Ad creative sets',
-                'Thumbnails & social templates'
-            ],
-            benefits: [
-                'Professional visuals',
-                'Higher ad CTRs',
-                'Consistent brand look'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle></svg>`
-        },
-        'video-marketing': {
-            title: 'Video Marketing',
-            description: 'Reels, ad videos and long-form YouTube content to engage audiences and drive conversions.',
-            features: [
-                'Reels & short-form production',
-                'Ad video creation',
-                'YouTube channel content & strategy'
-            ],
-            benefits: [
-                'Higher engagement',
-                'Improved conversion rates',
-                'Stronger storytelling'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>`
-        },
-        'landing-promotion': {
-            title: 'Website / Landing Page Promotion',
-            description: 'Promote landing pages and websites to drive traffic and capture leads for your campaigns.',
-            features: [
-                'Traffic campaigns & funnels',
-                'Conversion rate optimization',
-                'Lead magnet & form setups'
-            ],
-            benefits: [
-                'Increased leads',
-                'Better campaign ROI',
-                'Optimized conversion paths'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"></path><path d="M12 3v18"></path></svg>`
-        },
-        'analytics-reporting': {
-            title: 'Analytics & Reporting',
-            description: 'Detailed reports on reach, clicks, leads and sales to measure and improve campaign performance.',
-            features: [
-                'Custom report dashboards',
-                'Weekly / monthly insights',
-                'Funnel & attribution analysis'
-            ],
-            benefits: [
-                'Clear performance visibility',
-                'Data-driven decisions',
-                'Improved ROI over time'
-            ],
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18 9l-5 5-3-3"></path></svg>`
-        }
-    };
-
-    // Get modal elements
-    const modal = document.getElementById('serviceModal');
-    const modalOverlay = modal.querySelector('.modal-overlay');
-    const modalClose = modal.querySelector('.modal-close');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalIcon = document.getElementById('modalIcon');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalFeatures = document.getElementById('modalFeatures');
-    const modalBenefits = document.getElementById('modalBenefits');
-    const modalCta = modal.querySelector('.modal-cta');
-
-    // Get all service cards
-    const serviceCards = document.querySelectorAll('.service-card[data-service]');
-
-    // Function to open modal
-    function openModal(serviceId) {
-        const service = serviceDetails[serviceId];
-        if (!service) return;
-
-        // Populate modal content
-        modalTitle.textContent = service.title;
-        modalIcon.innerHTML = service.icon;
-        modalDescription.textContent = service.description;
-
-        // Populate features
-        modalFeatures.innerHTML = '';
-        service.features.forEach(feature => {
-            const li = document.createElement('li');
-            li.textContent = feature;
-            modalFeatures.appendChild(li);
-        });
-
-        // Populate benefits
-        modalBenefits.innerHTML = '';
-        service.benefits.forEach(benefit => {
-            const li = document.createElement('li');
-            li.textContent = benefit;
-            modalBenefits.appendChild(li);
-        });
-
-        // Show modal
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
     }
 
-    // Function to close modal
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+    .nav-menu {
+        gap: 1.5rem;
     }
 
-    // Add click event listeners to service cards
-    serviceCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const serviceId = this.getAttribute('data-service');
-            openModal(serviceId);
-        });
-    });
-
-    // Close modal on overlay click
-    modalOverlay.addEventListener('click', closeModal);
-
-    // Close modal on close button click
-    modalClose.addEventListener('click', closeModal);
-
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
-    });
-
-    // Prevent modal content clicks from closing modal
-    modal.querySelector('.modal-content').addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-
-    // If user clicks the modal CTA (Get Started) close modal and hide services section
-    if (modalCta) {
-        modalCta.addEventListener('click', function(e) {
-            e.preventDefault();
-            closeModal();
-
-            const servicesSection = document.getElementById('services');
-            if (servicesSection) {
-                servicesSection.style.transition = 'opacity 420ms ease, max-height 420ms ease';
-                servicesSection.style.opacity = '0';
-                servicesSection.style.maxHeight = '0';
-                setTimeout(() => { servicesSection.style.display = 'none'; }, 450);
-            }
-
-            // Scroll to contact section after hiding services
-            const contact = document.getElementById('contact');
-            if (contact) {
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = contact.offsetTop - navbarHeight;
-                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-            }
-        });
+    .nav-link {
+        font-size: 0.85rem;
     }
 
-    // Create a persistent "View services" pill to restore the hidden section
-    function ensureViewServicesPill() {
-        if (document.getElementById('viewServicesPill')) return document.getElementById('viewServicesPill');
-        const btn = document.createElement('button');
-        btn.id = 'viewServicesPill';
-        btn.className = 'view-services-pill';
-        btn.textContent = 'View services';
-        btn.setAttribute('aria-label', 'View services');
-        btn.addEventListener('click', function() {
-            const servicesSection = document.getElementById('services');
-            if (!servicesSection) return;
-            servicesSection.style.display = '';
-            // allow layout then animate back
-            requestAnimationFrame(() => {
-                servicesSection.style.maxHeight = '';
-                servicesSection.style.opacity = '1';
-            });
-            // remove pill with fade
-            btn.classList.remove('show');
-            setTimeout(() => { btn.remove(); }, 260);
-            // scroll to services
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = servicesSection.offsetTop - navbarHeight;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        });
-        document.body.appendChild(btn);
-        // small delay to enable transition
-        setTimeout(() => btn.classList.add('show'), 20);
-        return btn;
+    .logo {
+        font-size: 1.4rem;
+        height: 40px;
     }
 
-    // When services are hidden (modal CTA), show the pill
-    if (modalCta) {
-        modalCta.addEventListener('click', function() {
-            // small delay to ensure services were hidden
-            setTimeout(() => { ensureViewServicesPill(); }, 280);
-        });
-    }
-});
-
-// Services carousel controls (prev/next + drag-to-scroll)
-document.addEventListener('DOMContentLoaded', function() {
-    const container = document.querySelector('.services-grid.carousel');
-    const prev = document.querySelector('.services-prev');
-    const next = document.querySelector('.services-next');
-    if (!container) return;
-
-    const scrollAmount = () => Math.round(container.clientWidth * 0.7);
-
-    if (prev) {
-        prev.addEventListener('click', () => {
-            container.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-        });
-    }
-    if (next) {
-        next.addEventListener('click', () => {
-            container.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-        });
+    .nav-logo-image {
+        height: 35px;
     }
 
-    // Drag to scroll
-    let isDown = false, startX, scrollLeft;
-    container.addEventListener('mousedown', (e) => {
-        isDown = true;
-        container.classList.add('dragging');
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-    });
-    container.addEventListener('mouseleave', () => { isDown = false; container.classList.remove('dragging'); });
-    container.addEventListener('mouseup', () => { isDown = false; container.classList.remove('dragging'); });
-    container.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1; // scroll-fast
-        container.scrollLeft = scrollLeft - walk;
-    });
+    .nav-logo-text {
+        font-size: 1.4rem;
+    }
 
-    // Keyboard accessibility: arrow keys when focused
-    container.setAttribute('tabindex', '0');
-    container.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { container.scrollBy({ left: 260, behavior: 'smooth' }); }
-        if (e.key === 'ArrowLeft') { container.scrollBy({ left: -260, behavior: 'smooth' }); }
-    });
-});
+    .hero {
+        padding-top: 70px;
+        min-height: 90vh;
+    }
+
+    .hero-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .hero-logo {
+        margin-bottom: 2rem;
+        justify-content: center;
+    }
+
+    .logo-image {
+        max-width: 150px;
+    }
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .contact-btn {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+
+    .service-card {
+        padding: 2.5rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        gap: 0.75rem;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
+
+    .hero-logo {
+        margin-bottom: 1.5rem;
+    }
+
+    .logo-image {
+        max-width: 120px;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+    }
+
+    .nav-logo-image {
+        height: 30px;
+    }
+
+    .nav-logo-text {
+        font-size: 1.2rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .service-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .modal-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .modal-footer {
+        padding: 1.5rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .modal-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .modal-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Smooth Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.service-card,
+.video-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Focus States for Accessibility */
+.nav-link:focus,
+.cta-button:focus,
+.contact-btn:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.why-we {
+  padding: 80px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.why-we h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.why-we .subtitle {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 50px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.why-card {
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+}
+
+.why-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.why-card p {
+  font-size: 15px;
+  color: #666;
+}
+
+
+
+.why-card {
+  background: linear-gradient(135deg, #e0f2fe, #ffffff);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
